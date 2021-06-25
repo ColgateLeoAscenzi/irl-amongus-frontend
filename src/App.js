@@ -9,7 +9,7 @@ const App = () => {
     useEffect(() => {
         setSocket(socketClient(SERVER));
         return () => {
-            socket.disconnect();
+            socket && socket.disconnect();
             setSocket(null);
         };
     }, [socket]);
