@@ -1,38 +1,73 @@
 {
-  "name": "app",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-    "web-vitals": "^1.0.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+    "name": "app",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@testing-library/jest-dom": "^5.11.4",
+        "@testing-library/react": "^11.1.0",
+        "@testing-library/user-event": "^12.1.10",
+        "husky": "^6.0.0",
+        "lint-staged": "^11.0.0",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-scripts": "4.0.3",
+        "web-vitals": "^1.0.1"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "lint:raw": "eslint \"{*,{src,public,docs,.storybook}/**/*,__{tests,mocks}__/**/*}.{js,jsx,tsx}\"",
+        "lint": "yarn run lint:raw || true",
+        "pretty": "prettier --write \"{*,{src,public,docs,.storybook}/**/*,__{tests,mocks}__/**/*}.{js,jsx,tsx,json,md,yml,html}\"",
+        "fixcode": "yarn run lint:raw --fix && yarn run pretty && yarn run lint",
+        "prepare": "husky install"
+    },
+    "prettier": "@carimus/prettier-config",
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "{*,{src,public,docs,.storybook}/**/*,__{tests,mocks}__/**/*}.{js,jsx,tsx}": [
+            "prettier --write",
+            "eslint"
+        ],
+        "{*,{src,public,docs,.storybook}/**/*,__{tests,mocks}__/**/*}.{json,md,yml,html}": [
+            "prettier --write"
+        ]
+    },
+    "eslintConfig": {
+        "extends": [
+            "@carimus/eslint-config-react"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "@carimus/eslint-config-react": "^1.2.0",
+        "@carimus/prettier-config": "^1.1.0",
+        "eslint": "^7.29.0",
+        "eslint-plugin-babel": "^5.3.1",
+        "eslint-plugin-import": "^2.23.4",
+        "eslint-plugin-jest": "^24.3.6",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-promise": "^5.1.0",
+        "eslint-plugin-react": "^7.24.0",
+        "eslint-plugin-react-hooks": "^4.2.0",
+        "eslint-plugin-standard": "^5.0.0",
+        "prettier": "^2.3.1"
+    }
 }
