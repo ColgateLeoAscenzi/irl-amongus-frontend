@@ -1,25 +1,25 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
 const white = '#ffffff';
-const black = 'rgba(0, 0, 0, 0.9)';
-const lightBlue = '#2E9ED3';
-const lightGray = '#EEEFEF';
-const mediumGray = '#909090';
-const mediumGreen = '#658D18';
-const darkBlue = '#17214C';
+const black = '#000000';
+const green = '#50f078';
+const gray = '#4d4d4d';
 const fontFamily = 'mr-eaves, "Helvetica Neue", Helvetica, Arial, sans-serif';
+const amongUsFont = '"Amatic SC", cursive';
+const pixelFont = '"VT323", monospace';
 
 const palette = {
     primary: {
-        main: darkBlue,
+        main: black,
         contrastText: white,
         dark: black,
-        light: lightBlue,
+        light: gray,
     },
     secondary: {
-        main: '#7ED150',
-        contrastText: darkBlue,
-        dark: mediumGreen,
+        main: '#black',
+        contrastText: white,
+        dark: black,
+        light: gray,
     },
     background: {
         main: white,
@@ -52,15 +52,14 @@ const palette = {
         main: 'rgba(0,0,0,0.75)',
     },
     input: {
-        label: darkBlue,
-        border: lightGray,
-        text: '#909090',
+        label: white,
+        border: white,
+        text: white,
     },
     white,
-    lightBlue,
-    lightGray,
-    mediumGray,
-    mediumGreen,
+    black,
+    green,
+    gray,
 };
 
 const breakpoints = {
@@ -101,6 +100,8 @@ const breakpointsHelpers = {
 
 const typography = {
     fontFamily,
+    amongUsFont,
+    pixelFont,
     normal: {
         fontFamily,
         fontSize: '14px',
@@ -163,7 +164,7 @@ const common = {
 const overrides = {
     MuiTypography: {
         colorTextSecondary: {
-            color: mediumGreen,
+            color: white,
         },
         colorTextPrimary: {
             color: white,
@@ -171,13 +172,13 @@ const overrides = {
     },
     MuiToolbar: {
         root: {
-            backgroundColor: lightGray,
+            backgroundColor: black,
         },
     },
 };
 
 export default createMuiTheme({
-    themeName: 'Luma MC Theme',
+    themeName: 'IRL Among Us Theme  ',
     palette,
     typography,
     common,

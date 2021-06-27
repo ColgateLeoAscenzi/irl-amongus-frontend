@@ -1,7 +1,10 @@
 export default (theme) => ({
     root: {
+        position: 'absolute',
+        left: 0,
+        top: 0,
         width: '100%',
-        height: '98vh',
-        backgroundColor: theme.palette.lightGray,
+        height: '100%',
+        backgroundColor: theme.palette.black,
     },
 });

@@ -34,7 +34,9 @@ const Admin = ({ classes }) => {
             <Button className={classes.dangerButton} onClick={clickHandler}>
                 Reset Rooms
             </Button>
-            <Button onClick={statusHandler}>Check Status</Button>
+            <Button className={classes.statusButton} onClick={statusHandler}>
+                Check Status
+            </Button>
         </div>
     );
 };

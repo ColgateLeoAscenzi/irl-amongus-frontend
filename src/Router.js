@@ -4,13 +4,14 @@ import { Redirect, Router, Route, Switch } from 'react-router-dom';
 import Admin from './components/Admin';
 import { ADMIN_ROUTE, GAME_ROUTE } from './routeConstants';
 import Game from './components/Game';
+import { withLayout } from './components/Layout/connect';
 
 const myRouter = ({ history }) => {
     return (
         <Router history={history}>
             <Switch>
                 <Route exact path={GAME_ROUTE}>
-                    <Game />
+                    {withLayout(Game)}
                 </Route>
                 <Route exact path={ADMIN_ROUTE}>
                     <Admin />
