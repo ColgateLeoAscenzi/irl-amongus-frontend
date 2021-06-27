@@ -8,18 +8,25 @@ import {
     resetGame,
     setInLobby,
     setPlayers,
+    setRoomCode,
 } from '../../contexts/GameContext/actions';
 import SocketContext from '../../contexts/SocketContext';
 import PlayerForm from '../PlayerForm';
+import Lobby from '../Lobby';
+import UserContext from '../../contexts/UserContext';
+import { setName } from '../../contexts/UserContext/actions';
 
 const Game = ({ classes }) => {
     const { gameState, gameDispatch } = useContext(GameContext);
+    const { userDispatch } = useContext(UserContext);
     const { socket } = useContext(SocketContext);
 
     socket &&
-        socket.on('joined-room', (players) => {
+        socket.on('joined-room', ({ players, roomCode, name }) => {
             dispatch(gameDispatch, setPlayers(players || []));
             dispatch(gameDispatch, setInLobby());
+            dispatch(gameDispatch, setRoomCode(roomCode));
+            dispatch(userDispatch, setName(name));
         });
 
     socket &&
@@ -34,19 +41,7 @@ const Game = ({ classes }) => {
 
     return (
         <div className={classes.root}>
-            {gameState?.inLobby ? (
-                <div>
-                    <div>Players:</div>
-                    <ul>
-                        {gameState.players &&
-                            gameState.players.map((player, i) => (
-                                <li key={i}>{player?.name}</li>
-                            ))}
-                    </ul>
-                </div>
-            ) : (
-                <PlayerForm />
-            )}
+            {gameState?.inLobby ? <Lobby /> : <PlayerForm />}
         </div>
     );
 };

@@ -4,6 +4,8 @@ const white = '#ffffff';
 const black = '#000000';
 const green = '#50f078';
 const gray = '#4d4d4d';
+const votingBlue = '#a0bbd6';
+const playerBoxGray = '#d8dfe5';
 const fontFamily = 'mr-eaves, "Helvetica Neue", Helvetica, Arial, sans-serif';
 const amongUsFont = '"Amatic SC", cursive';
 const pixelFont = '"VT323", monospace';
@@ -60,6 +62,8 @@ const palette = {
     black,
     green,
     gray,
+    votingBlue,
+    playerBoxGray,
 };
 
 const breakpoints = {

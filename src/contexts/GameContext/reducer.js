@@ -11,6 +11,8 @@ export const gameInitialState = {
     inLobby: false,
     roomCode: '',
     players: [],
+    tasksCompleted: 0,
+    totalTasks: 56,
 };
 
 export const InitGameReducer = () => gameInitialState;
@@ -21,11 +23,6 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 gameStarted: true,
-            };
-        }
-        case RESET_GAME: {
-            return {
-                gameInitialState,
             };
         }
         case SET_ROOM_CODE: {
@@ -44,6 +41,11 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 players: action.payload,
+            };
+        }
+        case RESET_GAME: {
+            return {
+                gameInitialState,
             };
         }
         default:

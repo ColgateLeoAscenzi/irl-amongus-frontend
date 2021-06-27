@@ -1,32 +1,48 @@
 import React, { useContext, useState } from 'react';
-import { InputLabel, TextField, withStyles } from '@material-ui/core';
+import {
+    InputLabel,
+    TextField,
+    Typography,
+    withStyles,
+} from '@material-ui/core';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
-import { dispatch } from '../../contexts/utils';
-import { setName } from '../../contexts/UserContext/actions';
-import { setRoomCode } from '../../contexts/GameContext/actions';
 import UserContext from '../../contexts/UserContext';
-import GameContext from '../../contexts/GameContext';
 import SocketContext from '../../contexts/SocketContext';
 import styles from './styles';
 
 const PlayerForm = ({ classes }) => {
-    const { userDispatch } = useContext(UserContext);
-    const { gameDispatch } = useContext(GameContext);
+    const { userState } = useContext(UserContext);
     const { socket } = useContext(SocketContext);
 
     const [localRoomCode, setLocalRoomCode] = useState('');
     const [localName, setLocalName] = useState('');
+    const [nameErrors, setNameErrors] = useState('');
+
+    socket &&
+        socket.on('name-taken', (name) => {
+            setNameErrors(`${name} Already in Lobby`);
+        });
 
     const clickHandler = (e) => {
         e.preventDefault();
-        socket &&
-            socket.emit('create-room', {
-                roomcode: localRoomCode,
-                name: localName,
-            });
-        dispatch(userDispatch, setName(localName));
-        dispatch(gameDispatch, setRoomCode(localRoomCode));
+        if (localName === '') {
+            if (userState.name !== '') {
+                socket &&
+                    socket.emit('create-room', {
+                        roomcode: localRoomCode,
+                        name: userState.name,
+                    });
+            } else {
+                setNameErrors('Name Is Required');
+            }
+        } else {
+            socket &&
+                socket.emit('create-room', {
+                    roomcode: localRoomCode,
+                    name: localName,
+                });
+        }
     };
 
     return (
@@ -53,10 +69,18 @@ const PlayerForm = ({ classes }) => {
                         className={classes.input}
                         name="name"
                         onChange={(e) => {
+                            setNameErrors('');
                             setLocalName(e.target.value);
                         }}
+                        placeholder={
+                            userState.name !== '' ? userState.name : ''
+                        }
                     />
-                    `
+                    {nameErrors !== '' && (
+                        <Typography className={classes.error}>
+                            {nameErrors}
+                        </Typography>
+                    )}
                 </div>
                 <Button
                     type="submit"
