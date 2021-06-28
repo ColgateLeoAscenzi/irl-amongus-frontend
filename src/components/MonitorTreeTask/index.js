@@ -17,35 +17,43 @@ const MonitorTreeTask = ({ classes }) => {
         <div className={classes.root}>
             <Typography className={classes.title}>Monitor Tree</Typography>
             <Slider
+                min={0}
+                max={100}
                 orientation="vertical"
                 defaultValue={0}
                 valueLabelDisplay="on"
                 marks={[{ value: randomInts[0], label: `${randomInts[0]}` }]}
-                step={10}
+                step={1}
                 className={classes.slider}
             />
             <Slider
+                min={0}
+                max={100}
                 orientation="vertical"
                 defaultValue={50}
                 valueLabelDisplay="on"
                 marks={[{ value: randomInts[1], label: `${randomInts[1]}` }]}
-                step={10}
+                step={1}
                 className={classes.slider}
             />
             <Slider
+                min={0}
+                max={100}
                 orientation="vertical"
                 defaultValue={0}
                 valueLabelDisplay="on"
                 marks={[{ value: randomInts[2], label: `${randomInts[2]}` }]}
-                step={10}
+                step={1}
                 className={classes.slider}
             />
             <Slider
+                min={0}
+                max={100}
                 orientation="vertical"
                 defaultValue={75}
                 valueLabelDisplay="on"
                 marks={[{ value: randomInts[3], label: `${randomInts[3]}` }]}
-                step={10}
+                step={1}
                 className={classes.slider}
             />
         </div>

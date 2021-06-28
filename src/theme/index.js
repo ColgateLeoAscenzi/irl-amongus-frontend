@@ -179,6 +179,17 @@ const overrides = {
             backgroundColor: black,
         },
     },
+    MuiSlider: {
+        thumb: {
+            color: 'blue',
+        },
+        track: {
+            color: 'red',
+        },
+        rail: {
+            color: 'white',
+        },
+    },
 };
 
 export default createMuiTheme({
