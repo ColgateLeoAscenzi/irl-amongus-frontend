@@ -9,12 +9,14 @@ import {
     setInLobby,
     setPlayers,
     setRoomCode,
+    startGame,
 } from '../../contexts/GameContext/actions';
 import SocketContext from '../../contexts/SocketContext';
 import PlayerForm from '../PlayerForm';
 import Lobby from '../Lobby';
 import UserContext from '../../contexts/UserContext';
 import { setName } from '../../contexts/UserContext/actions';
+import InGame from '../InGame';
 
 const Game = ({ classes }) => {
     const { gameState, gameDispatch } = useContext(GameContext);
@@ -39,9 +41,21 @@ const Game = ({ classes }) => {
             dispatch(gameDispatch, resetGame());
         });
 
+    socket &&
+        socket.on('reset-room', () => {
+            dispatch(gameDispatch, resetGame());
+        });
+
+    socket &&
+        socket.on('game-started', () => {
+            dispatch(gameDispatch, startGame());
+        });
+
     return (
         <div className={classes.root}>
-            {gameState?.inLobby ? <Lobby /> : <PlayerForm />}
+            {!gameState.inLobby && !gameState.inProgress && <PlayerForm />}
+            {gameState.inLobby && !gameState.inProgress && <Lobby />}
+            {gameState.inProgress && <InGame />}
         </div>
     );
 };

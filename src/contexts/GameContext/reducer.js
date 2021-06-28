@@ -7,7 +7,7 @@ import {
 } from './actions';
 
 export const gameInitialState = {
-    gameStarted: false,
+    inProgress: false,
     inLobby: false,
     roomCode: '',
     players: [],
@@ -22,7 +22,7 @@ const reducer = (state, action) => {
         case START_GAME: {
             return {
                 ...state,
-                gameStarted: true,
+                inProgress: true,
             };
         }
         case SET_ROOM_CODE: {

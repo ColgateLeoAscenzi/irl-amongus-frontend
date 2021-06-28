@@ -30,7 +30,7 @@ const PlayerForm = ({ classes }) => {
             if (userState.name !== '') {
                 socket &&
                     socket.emit('create-room', {
-                        roomcode: localRoomCode,
+                        roomCode: localRoomCode,
                         name: userState.name,
                     });
             } else {
@@ -39,7 +39,7 @@ const PlayerForm = ({ classes }) => {
         } else {
             socket &&
                 socket.emit('create-room', {
-                    roomcode: localRoomCode,
+                    roomCode: localRoomCode,
                     name: localName,
                 });
         }

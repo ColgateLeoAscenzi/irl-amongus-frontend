@@ -23,4 +23,16 @@ export default (theme) => ({
         width: '50vw',
         color: theme.palette.primary.contrastText,
     },
+    buttonClass: {
+        color: theme.palette.primary.contrastText,
+        backgroundColor: theme.palette.primary.main,
+        border: 'solid',
+        borderColor: theme.palette.primary.contrastText,
+        borderWidth: 3,
+        borderRadius: 10,
+        fontSize: 16,
+        '&:hover': {
+            borderColor: theme.palette.green,
+        },
+    },
 });
