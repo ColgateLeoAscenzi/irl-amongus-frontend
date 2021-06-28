@@ -5,7 +5,7 @@ import Admin from './components/Admin';
 import { ADMIN_ROUTE, GAME_ROUTE, TEST_TASK } from './routeConstants';
 import Game from './components/Game';
 import { withLayout } from './components/Layout/connect';
-import MedbayScanTask from './components/MedbayScanTask';
+import MonitorTreeTask from './components/MonitorTreeTask';
 
 const myRouter = ({ history }) => {
     return (
@@ -18,7 +18,7 @@ const myRouter = ({ history }) => {
                     <Admin />
                 </Route>
                 <Route exact path={TEST_TASK}>
-                    {withLayout(MedbayScanTask)}
+                    {withLayout(MonitorTreeTask)}
                 </Route>
                 <Redirect to={GAME_ROUTE} />
             </Switch>
