@@ -17,7 +17,7 @@ const ActionBar = ({ classes }) => {
     const [taskListOpen, setTaskListOpen] = useState(false);
 
     const handleKill = () => {
-        dispatch(userDispatch, killPlayer);
+        dispatch(userDispatch, killPlayer());
         socket &&
             socket.emit('kill', {
                 roomCode: gameState.roomCode,
