@@ -51,36 +51,36 @@ const Game = ({ classes }) => {
     }, [gameState, userState, socket, doOnce, userDispatch]);
     useEffect(() => {
         if (socket) {
-            socket.on('joined-room', ({ players, roomCode, name }) => {
+            socket.once('joined-room', ({ players, roomCode, name }) => {
                 dispatch(gameDispatch, setPlayers(players || []));
                 dispatch(gameDispatch, setInLobby());
                 dispatch(gameDispatch, setRoomCode(roomCode));
                 dispatch(userDispatch, setName(name));
             });
 
-            socket.on('new-player', (players) => {
+            socket.once('new-player', (players) => {
                 dispatch(gameDispatch, setPlayers(players || []));
             });
 
-            socket.on('reset-all-rooms', () => {
+            socket.once('reset-all-rooms', () => {
                 dispatch(gameDispatch, resetGame());
             });
 
-            socket.on('reset-room', () => {
+            socket.once('reset-room', () => {
                 dispatch(gameDispatch, resetGame());
             });
 
-            socket.on('game-started', ({ totalTasks, masterTaskList }) => {
+            socket.once('game-started', ({ totalTasks, masterTaskList }) => {
                 dispatch(gameDispatch, startGame());
                 dispatch(gameDispatch, setTotalTasks(totalTasks));
                 dispatch(gameDispatch, setMasterTaskList(masterTaskList));
             });
 
-            socket.on('game-over', ({ winner }) => {
+            socket.once('game-over', ({ winner }) => {
                 dispatch(gameDispatch, setWinner(winner));
             });
 
-            socket.on('task-update', ({ completedTasks }) => {
+            socket.once('task-update', ({ completedTasks }) => {
                 dispatch(gameDispatch, setTasksCompleted(completedTasks));
             });
         }
