@@ -5,7 +5,7 @@ import Admin from './components/Admin';
 import { ADMIN_ROUTE, GAME_ROUTE, TEST_TASK } from './routeConstants';
 import Game from './components/Game';
 import { withLayout } from './components/Layout/connect';
-import MonitorTreeTask from './components/MonitorTreeTask';
+import MonitorTreeTask from './components/Tasks/MonitorTreeTask';
 
 const myRouter = ({ history }) => {
     return (

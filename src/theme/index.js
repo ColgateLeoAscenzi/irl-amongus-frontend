@@ -1,14 +1,22 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
+const fontFamily = 'mr-eaves, "Helvetica Neue", Helvetica, Arial, sans-serif';
+const amongUsFont = '"Amatic SC", cursive';
+const pixelFont = '"VT323", monospace';
+
 const white = '#ffffff';
 const black = '#000000';
 const green = '#50f078';
 const gray = '#4d4d4d';
 const votingBlue = '#a0bbd6';
 const playerBoxGray = '#d8dfe5';
-const fontFamily = 'mr-eaves, "Helvetica Neue", Helvetica, Arial, sans-serif';
-const amongUsFont = '"Amatic SC", cursive';
-const pixelFont = '"VT323", monospace';
+const CO2Yellow = '#bbbb59';
+const nutriGreen = '#5bba77';
+const radRed = '#de4122';
+const waterBlue = '#459bfe';
+const monitorSliderBlue = '#82d2eb';
+const sliderKnobBlue = '#5da7bb';
+const sliderBorderBlue = '#417f92';
 
 const palette = {
     primary: {
@@ -58,12 +66,27 @@ const palette = {
         border: white,
         text: white,
     },
+    monitorSlider: {
+        background: monitorSliderBlue,
+        CO2: CO2Yellow,
+        nutri: nutriGreen,
+        rad: radRed,
+        water: waterBlue,
+        knob: sliderKnobBlue,
+        sliderBorder: sliderBorderBlue,
+    },
     white,
     black,
     green,
     gray,
     votingBlue,
     playerBoxGray,
+    CO2Yellow,
+    nutriGreen,
+    radRed,
+    waterBlue,
+    sliderKnobBlue,
+    sliderBorderBlue,
 };
 
 const breakpoints = {
@@ -177,17 +200,6 @@ const overrides = {
     MuiToolbar: {
         root: {
             backgroundColor: black,
-        },
-    },
-    MuiSlider: {
-        thumb: {
-            color: 'blue',
-        },
-        track: {
-            color: 'red',
-        },
-        rail: {
-            color: 'white',
         },
     },
 };
