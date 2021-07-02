@@ -27,12 +27,14 @@ import {
     WIRES_TASK_ID,
 } from '../consts';
 import SimpleTask from '../SimpleTask';
+import EmergencyButton from '../../EmergencyButton';
 
 const TaskWrapper = ({ classes }) => {
     const { userState } = useContext(UserContext);
 
     return (
         <div className={classes.root}>
+            {userState.currentTask === '0' && null}
             {userState.currentTask === WIRES_TASK_ID && (
                 <SimpleTask taskID={WIRES_TASK_ID} />
             )}
@@ -93,6 +95,7 @@ const TaskWrapper = ({ classes }) => {
             {userState.currentTask === MONITOR_TREE_TASK_ID && (
                 <MonitorTreeTask />
             )}
+            {userState.currentTask === '911' && <EmergencyButton />}
         </div>
     );
 };

@@ -12,7 +12,7 @@ export const userInitialState = {
     name: '',
     isDead: false,
     role: '',
-    currentTaskId: 0,
+    currentTaskId: '0',
     doingTask: false,
     taskList: {},
 };

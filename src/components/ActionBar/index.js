@@ -8,6 +8,7 @@ import SocketContext from '../../contexts/SocketContext';
 import GameContext from '../../contexts/GameContext';
 import { killPlayer } from '../../contexts/UserContext/actions';
 import TaskListItem from '../TaskListItem';
+import TaskBar from './TaskBar';
 
 const ActionBar = ({ classes }) => {
     const { userState, userDispatch } = useContext(UserContext);
@@ -17,8 +18,10 @@ const ActionBar = ({ classes }) => {
     const [taskListOpen, setTaskListOpen] = useState(false);
 
     const handleKill = () => {
-        dispatch(userDispatch, killPlayer());
-        socket &&
+        !userState.isDead &&
+            !(userState.role === 'imposter') &&
+            dispatch(userDispatch, killPlayer()) &&
+            socket &&
             socket.emit('kill', {
                 roomCode: gameState.roomCode,
                 name: userState.name,
@@ -26,8 +29,17 @@ const ActionBar = ({ classes }) => {
     };
 
     const handleReport = () => {
-        socket &&
+        userState.isDead &&
+            socket &&
             socket.emit('report', {
+                roomCode: gameState.roomCode,
+            });
+    };
+
+    const handleEmergency = () => {
+        userState.role === 'imposter' &&
+            socket &&
+            socket.emit('call-emergency', {
                 roomCode: gameState.roomCode,
                 name: userState.name,
             });
@@ -35,21 +47,43 @@ const ActionBar = ({ classes }) => {
 
     return (
         <div className={classes.actionBarWrapper}>
+            <div className={classes.taskBarWrapper}>
+                <TaskBar />
+            </div>
+            {gameState.inEmergency && (
+                <Typography className={classes.emergency}>
+                    EMERGENCY!
+                </Typography>
+            )}
             <div className={classes.actionsWrapper}>
-                <div
+                <Typography
                     onClick={() => {
                         setTaskListOpen(!taskListOpen);
                     }}
                     className={classes.title}
                 >
                     Task List
+                </Typography>
+                <div className={classes.buttonWrapper}>
+                    <Button
+                        className={classes.dangerButton}
+                        onClick={handleKill}
+                    >
+                        Kill
+                    </Button>
+                    <Button
+                        className={classes.dangerButton}
+                        onClick={handleReport}
+                    >
+                        Report
+                    </Button>
+                    <Button
+                        className={classes.dangerButton}
+                        onClick={handleEmergency}
+                    >
+                        Call Emergency
+                    </Button>
                 </div>
-                <Button className={classes.dangerButton} onClick={handleKill}>
-                    Kill
-                </Button>
-                <Button className={classes.dangerButton} onClick={handleReport}>
-                    Report
-                </Button>
             </div>
             {taskListOpen && (
                 <Typography>

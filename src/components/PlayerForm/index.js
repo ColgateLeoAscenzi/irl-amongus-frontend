@@ -20,7 +20,7 @@ const PlayerForm = ({ classes }) => {
     const [nameErrors, setNameErrors] = useState('');
 
     socket &&
-        socket.on('name-taken', (name) => {
+        socket.once('name-taken', (name) => {
             setNameErrors(`${name} Already in Lobby`);
         });
 

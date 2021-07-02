@@ -4,12 +4,9 @@ export default (theme) => ({
         color: theme.palette.primary.contrastText,
         marginBottom: theme.spacing(2),
     },
-    titleWrapper: {
+    playerListWrapper: {
         display: 'flex',
-        flexDirection: 'row',
-        textAlign: 'center',
-        alignItems: 'center',
-        justifyContent: 'center',
+        flexDirection: 'column',
     },
     dangerButton: {
         margin: theme.spacing(1),

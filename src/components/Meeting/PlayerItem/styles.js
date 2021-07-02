@@ -7,16 +7,14 @@ export default (theme) => ({
     titleWrapper: {
         display: 'flex',
         flexDirection: 'row',
-        textAlign: 'center',
-        alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-evenly',
     },
-    dangerButton: {
+    voteButton: {
         margin: theme.spacing(1),
         color: theme.palette.primary.contrastText,
-        backgroundColor: theme.palette.danger.main,
+        backgroundColor: theme.palette.taskBarGreen,
         '&:hover, &:active, &visited': {
-            backgroundColor: `${theme.palette.danger.main}CC`,
+            backgroundColor: `${theme.palette.taskBarGreen}CC`,
         },
     },
 });

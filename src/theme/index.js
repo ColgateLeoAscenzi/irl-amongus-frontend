@@ -17,6 +17,7 @@ const waterBlue = '#459bfe';
 const monitorSliderBlue = '#82d2eb';
 const sliderKnobBlue = '#5da7bb';
 const sliderBorderBlue = '#417f92';
+const taskBarGreen = '#43d844';
 
 const palette = {
     primary: {
@@ -87,6 +88,7 @@ const palette = {
     waterBlue,
     sliderKnobBlue,
     sliderBorderBlue,
+    taskBarGreen,
 };
 
 const breakpoints = {

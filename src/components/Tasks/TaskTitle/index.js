@@ -19,11 +19,10 @@ const TaskTitle = ({ classes, title }) => {
     const handleClick = () => {
         dispatch(userDispatch, setCurrentTaskId('0'));
         dispatch(userDispatch, setDoingTask(false));
-        socket &&
-            socket.emit('start-task', {
-                roomCode: gameState.roomCode,
-                name: userState.name,
-            });
+        socket.emit('exit-task', {
+            roomCode: gameState.roomCode,
+            name: userState.name,
+        });
     };
 
     return (

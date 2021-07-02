@@ -1,6 +1,8 @@
 import {
     RESET_GAME,
     SET_IN_LOBBY,
+    SET_IN_MEETING,
+    SET_IN_EMERGENCY,
     SET_PLAYERS,
     SET_ROOM_CODE,
     SET_TOTAL_TASKS,
@@ -8,13 +10,17 @@ import {
     START_GAME,
     SET_TASKS_COMPLETED,
     SET_MASTER_TASK_LIST,
+    SET_PLAYER_STATUSES,
 } from './actions';
 
 export const gameInitialState = {
     inProgress: false,
     inLobby: false,
+    inMeeting: false,
+    inEmergency: false,
     roomCode: '',
     players: [],
+    playerStatuses: [],
     tasksCompleted: 0,
     totalTasks: -1,
     winner: '',
@@ -43,10 +49,28 @@ const reducer = (state, action) => {
                 inLobby: true,
             };
         }
+        case SET_IN_MEETING: {
+            return {
+                ...state,
+                inMeeting: action.payload,
+            };
+        }
+        case SET_IN_EMERGENCY: {
+            return {
+                ...state,
+                inEmergency: action.payload,
+            };
+        }
         case SET_PLAYERS: {
             return {
                 ...state,
                 players: action.payload,
+            };
+        }
+        case SET_PLAYER_STATUSES: {
+            return {
+                ...state,
+                playerStatuses: action.payload,
             };
         }
         case SET_TASKS_COMPLETED: {

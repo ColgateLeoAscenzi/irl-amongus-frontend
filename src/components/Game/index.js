@@ -14,12 +14,19 @@ import {
     setTasksCompleted,
     setTotalTasks,
     setMasterTaskList,
+    setInMeeting,
+    setPlayerStatuses,
+    setInEmergency,
 } from '../../contexts/GameContext/actions';
 import SocketContext from '../../contexts/SocketContext';
 import PlayerForm from '../PlayerForm';
 import Lobby from '../Lobby';
 import UserContext from '../../contexts/UserContext';
-import { setName, setTaskList } from '../../contexts/UserContext/actions';
+import {
+    setName,
+    setRole,
+    setTaskList,
+} from '../../contexts/UserContext/actions';
 import InGame from '../InGame';
 
 const Game = ({ classes }) => {
@@ -46,7 +53,17 @@ const Game = ({ classes }) => {
                         dispatch(userDispatch, setTaskList(taskList));
                     },
                 ) &&
-                setDoOnce(false);
+                socket.emit(
+                    'get-role',
+                    {
+                        roomCode: gameState.roomCode,
+                        name: userState.name,
+                    },
+                    (role) => {
+                        dispatch(userDispatch, setRole(role));
+                    },
+                );
+            setDoOnce(false);
         }
     }, [gameState, userState, socket, doOnce, userDispatch]);
     useEffect(() => {
@@ -80,8 +97,17 @@ const Game = ({ classes }) => {
                 dispatch(gameDispatch, setWinner(winner));
             });
 
-            socket.once('task-update', ({ completedTasks }) => {
-                dispatch(gameDispatch, setTasksCompleted(completedTasks));
+            socket.once('task-update', ({ tasksComplete }) => {
+                dispatch(gameDispatch, setTasksCompleted(tasksComplete));
+            });
+
+            socket.once('started-meeting', ({ playerStatuses }) => {
+                dispatch(gameDispatch, setInMeeting(true));
+                dispatch(gameDispatch, setPlayerStatuses(playerStatuses));
+            });
+
+            socket.once('emergency-started', () => {
+                dispatch(gameDispatch, setInEmergency(true));
             });
         }
     });

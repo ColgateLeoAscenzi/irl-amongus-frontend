@@ -10,6 +10,11 @@ export default (theme) => ({
         marginBottom: theme.spacing(2),
         color: theme.palette.primary.contrastText,
     },
+    noTaskError: {
+        marginLeft: '10%',
+        marginBottom: theme.spacing(2),
+        color: `${theme.palette.danger.main} !important`,
+    },
     input: {
         '& .MuiOutlinedInput-root': {
             marginLeft: '5%',
