@@ -9,7 +9,7 @@ import {
     setDoingTask,
 } from '../../contexts/UserContext/actions';
 import TaskWrapper from '../Tasks/TaskWrapper';
-import SocketContext from '../../contexts/SocketContext';
+import SocketContext2 from "../../socket";
 import GameContext from '../../contexts/GameContext';
 import { TASK_IDS } from '../Tasks/consts';
 import WinnerScreen from '../WinnerScreen';
@@ -19,7 +19,7 @@ import Meeting from '../Meeting';
 const InGame = ({ classes }) => {
     const { userState, userDispatch } = useContext(UserContext);
     const { gameState } = useContext(GameContext);
-    const { socket } = useContext(SocketContext);
+    const {socket} = React.useContext(SocketContext2);
     const [noTaskError, setNoTaskError] = useState('');
     const [localSelectedTask, setLocalSelectedTask] = useState('');
 
@@ -49,11 +49,12 @@ const InGame = ({ classes }) => {
             if (
                 (TASK_IDS.includes(selectedTask) &&
                     userState.taskList[selectedTask]) ||
-                selectedTask === '911'
+                selectedTask === '911' || selectedTask === '411'
             ) {
                 setNoTaskError('');
                 dispatch(userDispatch, setCurrentTaskId(selectedTask));
                 dispatch(userDispatch, setDoingTask(true));
+                (selectedTask !== '911' && selectedTask !== '411') &&
                 socket &&
                     socket.emit('start-task', {
                         roomCode: gameState.roomCode,
@@ -64,14 +65,14 @@ const InGame = ({ classes }) => {
             if (
                 !userState.taskList[selectedTask] &&
                 selectedTask !== '' &&
-                selectedTask !== '911'
+                selectedTask !== '911' && selectedTask !== '411'
             ) {
                 setNoTaskError(`You don't have that task`);
             }
             if (
                 !TASK_IDS.includes(selectedTask) &&
                 selectedTask !== '' &&
-                selectedTask !== '911'
+                selectedTask !== '911' && selectedTask !== '411'
             ) {
                 setNoTaskError('Invalid Task Id');
             }

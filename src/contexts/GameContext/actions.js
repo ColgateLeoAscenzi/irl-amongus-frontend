@@ -11,6 +11,7 @@ export const SET_WINNER = `${PREFIX}SET_WINNER`;
 export const SET_TOTAL_TASKS = `${PREFIX}SET_TOTAL_TASKS`;
 export const SET_TASKS_COMPLETED = `${PREFIX}SET_TASKS_COMPLETED`;
 export const SET_MASTER_TASK_LIST = `${PREFIX}SET_MASTER_TASK_LIST`;
+export const SET_VOTE_LIST = `${PREFIX}SET_VOTE_LIST`;
 
 export const startGame = () => ({
     type: START_GAME,
@@ -66,4 +67,9 @@ export const setTasksCompleted = (tasksCompleted) => ({
 export const setMasterTaskList = (taskList) => ({
     type: SET_MASTER_TASK_LIST,
     payload: taskList,
+});
+
+export const setVoteList = (voteList) => ({
+    type: SET_VOTE_LIST,
+    payload: voteList,
 });

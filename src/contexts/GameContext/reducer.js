@@ -10,7 +10,7 @@ import {
     START_GAME,
     SET_TASKS_COMPLETED,
     SET_MASTER_TASK_LIST,
-    SET_PLAYER_STATUSES,
+    SET_PLAYER_STATUSES, SET_VOTE_LIST,
 } from './actions';
 
 export const gameInitialState = {
@@ -25,6 +25,7 @@ export const gameInitialState = {
     totalTasks: -1,
     winner: '',
     masterTaskList: {},
+    voteList: [],
 };
 
 export const InitGameReducer = () => gameInitialState;
@@ -96,6 +97,12 @@ const reducer = (state, action) => {
                 ...state,
                 winner: action.payload,
             };
+        }
+        case SET_VOTE_LIST: {
+            return {
+                ...state,
+                voteList: action.payload,
+            }
         }
         case RESET_GAME: {
             return {

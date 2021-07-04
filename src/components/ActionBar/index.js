@@ -4,28 +4,29 @@ import { Button, Typography, withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { dispatch } from '../../contexts/utils';
 import UserContext from '../../contexts/UserContext';
-import SocketContext from '../../contexts/SocketContext';
 import GameContext from '../../contexts/GameContext';
-import { killPlayer } from '../../contexts/UserContext/actions';
+import {killPlayer, setShowRolePopup} from '../../contexts/UserContext/actions';
 import TaskListItem from '../TaskListItem';
 import TaskBar from './TaskBar';
+import SocketContext2 from "../../socket";
 
 const ActionBar = ({ classes }) => {
     const { userState, userDispatch } = useContext(UserContext);
     const { gameState } = useContext(GameContext);
-    const { socket } = useContext(SocketContext);
-
+    const {socket} = React.useContext(SocketContext2);
     const [taskListOpen, setTaskListOpen] = useState(false);
 
     const handleKill = () => {
-        !userState.isDead &&
-            !(userState.role === 'imposter') &&
-            dispatch(userDispatch, killPlayer()) &&
-            socket &&
-            socket.emit('kill', {
-                roomCode: gameState.roomCode,
-                name: userState.name,
-            });
+        if(!userState.isDead){
+            if(!(userState.role === "imposter")){
+                socket &&
+                socket.emit('kill', {
+                    roomCode: gameState.roomCode,
+                    name: userState.name,
+                });
+                dispatch(userDispatch, killPlayer());
+            }
+        }
     };
 
     const handleReport = () => {
@@ -44,6 +45,9 @@ const ActionBar = ({ classes }) => {
                 name: userState.name,
             });
     };
+
+    console.log(userState.showRolePopup);
+    console.log(userState.role);
 
     return (
         <div className={classes.actionBarWrapper}>
@@ -64,19 +68,27 @@ const ActionBar = ({ classes }) => {
                 >
                     Task List
                 </Typography>
+                {userState.showRolePopup && (<Typography
+                    onClick={() => {
+                        dispatch(userDispatch, setShowRolePopup(false));
+                    }}
+                    className={classes.title}
+                >
+                    {userState.role}
+                </Typography>)}
                 <div className={classes.buttonWrapper}>
-                    <Button
+                    {!userState.isDead && (<Button
                         className={classes.dangerButton}
                         onClick={handleKill}
                     >
                         Kill
-                    </Button>
-                    <Button
+                    </Button>)}
+                    {userState.isDead && (<Button
                         className={classes.dangerButton}
                         onClick={handleReport}
                     >
                         Report
-                    </Button>
+                    </Button>)}
                     <Button
                         className={classes.dangerButton}
                         onClick={handleEmergency}

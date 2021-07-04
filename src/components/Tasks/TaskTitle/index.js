@@ -10,12 +10,12 @@ import {
 } from '../../../contexts/UserContext/actions';
 import SocketContext from '../../../contexts/SocketContext';
 import GameContext from '../../../contexts/GameContext';
+import SocketContext2 from "../../../socket";
 
 const TaskTitle = ({ classes, title }) => {
     const { userState, userDispatch } = useContext(UserContext);
     const { gameState } = useContext(GameContext);
-    const { socket } = useContext(SocketContext);
-
+    const {socket} = React.useContext(SocketContext2);
     const handleClick = () => {
         dispatch(userDispatch, setCurrentTaskId('0'));
         dispatch(userDispatch, setDoingTask(false));

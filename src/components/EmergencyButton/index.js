@@ -2,13 +2,12 @@ import React, { useContext } from 'react';
 import styles from './styles';
 import { withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import SocketContext from '../../contexts/SocketContext';
 import GameContext from '../../contexts/GameContext';
+import SocketContext2 from "../../socket";
 
 const EmergencyButton = ({ classes }) => {
     const { gameState } = useContext(GameContext);
-    const { socket } = useContext(SocketContext);
-
+    const {socket} = React.useContext(SocketContext2);
     const handleTouchStart = () => {
         socket &&
             socket.emit('stop-emergency-onPress', {

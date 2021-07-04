@@ -3,14 +3,13 @@ import styles from './styles';
 import { withStyles } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
-import SocketContext from '../../contexts/SocketContext';
 import { Typography } from '@material-ui/core';
 import RoomBar from '../RoomBar';
 import clsx from 'clsx';
+import SocketContext2 from "../../socket";
 
 const Admin = ({ classes }) => {
-    const { socket } = useContext(SocketContext);
-
+    const {socket} = React.useContext(SocketContext2);
     const [status, setStatus] = useState('Checking Server Status...');
 
     const [roomsInfo, setRoomsInfo] = useState({});

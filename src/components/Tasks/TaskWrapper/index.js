@@ -28,6 +28,7 @@ import {
 } from '../consts';
 import SimpleTask from '../SimpleTask';
 import EmergencyButton from '../../EmergencyButton';
+import CallMeeting from "../../Meeting/CallMeeting";
 
 const TaskWrapper = ({ classes }) => {
     const { userState } = useContext(UserContext);
@@ -96,6 +97,7 @@ const TaskWrapper = ({ classes }) => {
                 <MonitorTreeTask />
             )}
             {userState.currentTask === '911' && <EmergencyButton />}
+            {userState.currentTask === '411' && <CallMeeting/>}
         </div>
     );
 };

@@ -7,6 +7,9 @@ export default (theme) => ({
     stat: {
         color: theme.palette.primary.contrastText,
     },
+    emergency: {
+        color: theme.palette.danger.main,
+    },
     formContainer: {
         display: 'flex',
         flexDirection: 'column',

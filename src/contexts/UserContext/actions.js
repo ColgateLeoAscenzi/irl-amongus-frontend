@@ -4,8 +4,8 @@ export const SET_ROLE = `${PREFIX}SET_ROLE`;
 export const SET_TASK_LIST = `${PREFIX}SET_TASK_LIST`;
 export const SET_DOING_TASK = `${PREFIX}SET_DOING_TASK`;
 export const SET_CURRENT_TASK_ID = `${PREFIX}SET_CURRENT_TASK_ID`;
-export const UPDATE_TASK_LIST = `${PREFIX}UPDATE_TASK_LIST`;
 export const KILL_PLAYER = `${PREFIX}KILL_PLAYER`;
+export const SET_SHOW_ROLE_POPUP = `${PREFIX}SET_SHOW_ROLE_POPUP`;
 
 export const setName = (name) => ({
     type: SET_NAME,
@@ -32,11 +32,11 @@ export const setCurrentTaskId = (taskID) => ({
     payload: taskID,
 });
 
-export const updateTaskList = (newTaskList) => ({
-    type: UPDATE_TASK_LIST,
-    payload: newTaskList,
-});
-
 export const killPlayer = () => ({
     type: KILL_PLAYER,
 });
+
+export const setShowRolePopup = (show) => ({
+    type: SET_SHOW_ROLE_POPUP,
+    payload: show,
+})

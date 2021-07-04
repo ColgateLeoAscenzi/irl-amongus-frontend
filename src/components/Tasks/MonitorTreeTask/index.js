@@ -21,12 +21,12 @@ import UserContext from '../../../contexts/UserContext';
 import GameContext from '../../../contexts/GameContext';
 import SocketContext from '../../../contexts/SocketContext';
 import { MONITOR_TREE_TASK_ID } from '../consts';
+import SocketContext2 from "../../../socket";
 
 const MonitorTreeTask = ({ classes }) => {
     const { userState, userDispatch } = useContext(UserContext);
     const { gameState } = useContext(GameContext);
-    const { socket } = useContext(SocketContext);
-
+    const {socket} = React.useContext(SocketContext2);
     // initialize target values once on load
     const [randomInts, setRandomInts] = useState([0, 0, 0, 0]);
     useEffect(() => {

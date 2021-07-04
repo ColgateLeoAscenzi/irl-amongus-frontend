@@ -5,7 +5,7 @@ import {
     SET_NAME,
     SET_ROLE,
     SET_TASK_LIST,
-    UPDATE_TASK_LIST,
+    SET_SHOW_ROLE_POPUP,
 } from './actions';
 
 export const userInitialState = {
@@ -15,6 +15,7 @@ export const userInitialState = {
     currentTaskId: '0',
     doingTask: false,
     taskList: {},
+    showRolePopup: false,
 };
 
 export const InitUserReducer = () => userInitialState;
@@ -57,11 +58,11 @@ const reducer = (state, action) => {
                 currentTask: action.payload,
             };
         }
-        case UPDATE_TASK_LIST: {
+        case SET_SHOW_ROLE_POPUP: {
             return {
                 ...state,
-                taskList: action.payload,
-            };
+                showRolePopup: action.payload,
+            }
         }
         default:
             throw new Error(`Unknown action: ${action.type}`);

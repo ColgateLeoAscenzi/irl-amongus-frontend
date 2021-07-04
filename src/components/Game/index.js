@@ -17,24 +17,31 @@ import {
     setInMeeting,
     setPlayerStatuses,
     setInEmergency,
+    setVoteList,
 } from '../../contexts/GameContext/actions';
-import SocketContext from '../../contexts/SocketContext';
+import SocketContext2 from "../../socket";
 import PlayerForm from '../PlayerForm';
 import Lobby from '../Lobby';
 import UserContext from '../../contexts/UserContext';
 import {
+    killPlayer,
     setName,
-    setRole,
+    setRole, setShowRolePopup,
     setTaskList,
 } from '../../contexts/UserContext/actions';
 import InGame from '../InGame';
+import useSound from 'use-sound';
+import lobbySfx from '../../assets/sound/enter-lobby.mp3';
 
 const Game = ({ classes }) => {
     const { gameState, gameDispatch } = useContext(GameContext);
     const { userState, userDispatch } = useContext(UserContext);
-    const { socket } = useContext(SocketContext);
+
+    const {socket} = React.useContext(SocketContext2);
 
     const [doOnce, setDoOnce] = useState(true);
+    const [playJoinLobby] = useSound(lobbySfx);
+
 
     useEffect(() => {
         if (
@@ -61,6 +68,8 @@ const Game = ({ classes }) => {
                     },
                     (role) => {
                         dispatch(userDispatch, setRole(role));
+                        dispatch(userDispatch, setShowRolePopup(true));
+                        console.log('here');
                     },
                 );
             setDoOnce(false);
@@ -73,6 +82,7 @@ const Game = ({ classes }) => {
                 dispatch(gameDispatch, setInLobby());
                 dispatch(gameDispatch, setRoomCode(roomCode));
                 dispatch(userDispatch, setName(name));
+                playJoinLobby();
             });
 
             socket.once('new-player', (players) => {
@@ -109,8 +119,25 @@ const Game = ({ classes }) => {
             socket.once('emergency-started', () => {
                 dispatch(gameDispatch, setInEmergency(true));
             });
+
+            socket.once('meeting-ended', ({killedPlayer}) => {
+                if(userState.name === killedPlayer) {
+                    dispatch(userDispatch, killPlayer());
+                }
+                dispatch(gameDispatch, setInMeeting(false));
+            });
+
+            socket.once('final-votes', ({voteList}) => {
+                dispatch(gameDispatch, setVoteList(voteList));
+            })
+
+            socket.once('finished-task', ({taskId}) => {
+                const taskCopy = userState.taskList;
+                delete taskCopy[taskId];
+                dispatch(userDispatch, setTaskList(taskCopy));
+            })
         }
-    });
+    }, []);
 
     return (
         <div className={classes.root}>

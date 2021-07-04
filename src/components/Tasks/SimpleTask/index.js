@@ -14,14 +14,14 @@ import UserContext from '../../../contexts/UserContext';
 import GameContext from '../../../contexts/GameContext';
 import SocketContext from '../../../contexts/SocketContext';
 import TaskTitle from '../TaskTitle';
+import SocketContext2 from "../../../socket";
 
 const SimpleTask = ({ classes, taskID }) => {
     const [checked, setChecked] = React.useState(false);
 
     const { userState, userDispatch } = useContext(UserContext);
     const { gameState } = useContext(GameContext);
-    const { socket } = useContext(SocketContext);
-
+    const {socket} = React.useContext(SocketContext2);
     const handleChange = () => {
         setChecked(!checked);
         dispatch(userDispatch, setCurrentTaskId('0'));

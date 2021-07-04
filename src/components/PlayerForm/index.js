@@ -8,13 +8,12 @@ import {
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import UserContext from '../../contexts/UserContext';
-import SocketContext from '../../contexts/SocketContext';
 import styles from './styles';
+import SocketContext2 from "../../socket";
 
 const PlayerForm = ({ classes }) => {
     const { userState } = useContext(UserContext);
-    const { socket } = useContext(SocketContext);
-
+    const {socket} = React.useContext(SocketContext2);
     const [localRoomCode, setLocalRoomCode] = useState('');
     const [localName, setLocalName] = useState('');
     const [nameErrors, setNameErrors] = useState('');

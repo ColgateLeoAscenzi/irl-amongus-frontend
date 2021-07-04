@@ -2,13 +2,12 @@ import React, { useContext } from 'react';
 import styles from './styles';
 import { Button, Typography, withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import SocketContext from '../../../contexts/SocketContext';
 import GameContext from '../../../contexts/GameContext';
+import SocketContext2 from "../../../socket";
 
 const PlayerItem = ({ classes, name, isDead, voted, setVoted }) => {
     const { gameState } = useContext(GameContext);
-    const { socket } = useContext(SocketContext);
-
+    const {socket} = React.useContext(SocketContext2);
     const handleClick = () => {
         !voted &&
             socket &&

@@ -3,12 +3,11 @@ import styles from './styles';
 import { Typography, withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import SocketContext from '../../contexts/SocketContext';
+import SocketContext2 from "../../socket";
 
 const RoomBar = ({ classes, roomCode, roomInfo, gameInfo }) => {
     const [dropDownOpen, setDropDownOpen] = useState(false);
-    const { socket } = useContext(SocketContext);
-
+    const {socket} = React.useContext(SocketContext2);
     const handleDropdown = () => {
         setDropDownOpen(!dropDownOpen);
         socket && socket.emit('fetch-admin-data');

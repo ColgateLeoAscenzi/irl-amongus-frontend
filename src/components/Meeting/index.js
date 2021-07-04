@@ -4,14 +4,13 @@ import { Button, withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import GameContext from '../../contexts/GameContext';
 import PlayerItem from './PlayerItem';
-import SocketContext from '../../contexts/SocketContext';
 import UserContext from '../../contexts/UserContext';
+import SocketContext2 from "../../socket";
 
 const Meeting = ({ classes }) => {
     const { gameState } = useContext(GameContext);
-    const { socket } = useContext(SocketContext);
     const { userState } = useContext(UserContext);
-
+    const {socket} = React.useContext(SocketContext2);
     const [voted, setVoted] = useState(false);
 
     const handleEndMeeting = () => {

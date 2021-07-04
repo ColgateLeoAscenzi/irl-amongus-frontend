@@ -5,12 +5,11 @@ import styles from './styles';
 import GameContext from '../../contexts/GameContext';
 import { Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import SocketContext from '../../contexts/SocketContext';
+import SocketContext2 from "../../socket";
 
 const Lobby = ({ classes }) => {
-    const { socket } = useContext(SocketContext);
     const { gameState } = useContext(GameContext);
-
+    const {socket} = React.useContext(SocketContext2);
     const startGame = () => {
         socket && socket.emit('start-game', { roomCode: gameState.roomCode });
     };
