@@ -12,7 +12,6 @@ import {
 } from '../../../contexts/UserContext/actions';
 import UserContext from '../../../contexts/UserContext';
 import GameContext from '../../../contexts/GameContext';
-import SocketContext from '../../../contexts/SocketContext';
 import TaskTitle from '../TaskTitle';
 import SocketContext2 from "../../../socket";
 

@@ -19,7 +19,6 @@ import {
 } from '../../../contexts/UserContext/actions';
 import UserContext from '../../../contexts/UserContext';
 import GameContext from '../../../contexts/GameContext';
-import SocketContext from '../../../contexts/SocketContext';
 import { MONITOR_TREE_TASK_ID } from '../consts';
 import SocketContext2 from "../../../socket";
 

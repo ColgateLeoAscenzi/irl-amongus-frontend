@@ -8,7 +8,6 @@ import {
     setCurrentTaskId,
     setDoingTask,
 } from '../../../contexts/UserContext/actions';
-import SocketContext from '../../../contexts/SocketContext';
 import GameContext from '../../../contexts/GameContext';
 import SocketContext2 from "../../../socket";
 

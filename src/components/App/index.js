@@ -1,5 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react';
-import socketClient from 'socket.io-client';
+import React, { useReducer } from 'react';
 import Router from '../../Router';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core';
@@ -14,7 +13,6 @@ import UserReducer, {
     userInitialState,
     InitUserReducer,
 } from '../../contexts/UserContext/reducer';
-import { socketInitialState } from '../../contexts/SocketContext/reducer';
 
 import SocketContext2, {socket} from '../../socket';
 

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './styles';
 import { Typography, withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';

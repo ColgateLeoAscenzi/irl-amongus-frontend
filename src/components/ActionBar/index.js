@@ -46,9 +46,6 @@ const ActionBar = ({ classes }) => {
             });
     };
 
-    console.log(userState.showRolePopup);
-    console.log(userState.role);
-
     return (
         <div className={classes.actionBarWrapper}>
             <div className={classes.taskBarWrapper}>

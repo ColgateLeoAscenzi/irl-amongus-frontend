@@ -69,7 +69,6 @@ const Game = ({ classes }) => {
                     (role) => {
                         dispatch(userDispatch, setRole(role));
                         dispatch(userDispatch, setShowRolePopup(true));
-                        console.log('here');
                     },
                 );
             setDoOnce(false);
@@ -137,6 +136,7 @@ const Game = ({ classes }) => {
                 dispatch(userDispatch, setTaskList(taskCopy));
             })
         }
+// eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
