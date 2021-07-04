@@ -41,11 +41,6 @@
         "prepare": "husky install"
     },
     "prettier": "@carimus/prettier-config",
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
-    },
     "lint-staged": {
         "{*,{src,public,docs,.storybook}/**/*,__{tests,mocks}__/**/*}.{js,jsx,tsx}": [
             "prettier --write",
