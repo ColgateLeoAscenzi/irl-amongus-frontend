@@ -76,7 +76,7 @@ const Game = ({ classes }) => {
     }, [gameState, userState, socket, doOnce, userDispatch]);
     useEffect(() => {
         if (socket) {
-            socket.once('joined-room', ({ players, roomCode, name }) => {
+            socket.on('joined-room', ({ players, roomCode, name }) => {
                 dispatch(gameDispatch, setPlayers(players || []));
                 dispatch(gameDispatch, setInLobby());
                 dispatch(gameDispatch, setRoomCode(roomCode));
@@ -84,49 +84,49 @@ const Game = ({ classes }) => {
                 playJoinLobby();
             });
 
-            socket.once('new-player', (players) => {
+            socket.on('new-player', (players) => {
                 dispatch(gameDispatch, setPlayers(players || []));
             });
 
-            socket.once('reset-all-rooms', () => {
+            socket.on('reset-all-rooms', () => {
                 dispatch(gameDispatch, resetGame());
             });
 
-            socket.once('reset-room', () => {
+            socket.on('reset-room', () => {
                 dispatch(gameDispatch, resetGame());
             });
 
-            socket.once('game-started', ({ totalTasks, masterTaskList }) => {
+            socket.on('game-started', ({ totalTasks, masterTaskList }) => {
                 dispatch(gameDispatch, startGame());
                 dispatch(gameDispatch, setTotalTasks(totalTasks));
                 dispatch(gameDispatch, setMasterTaskList(masterTaskList));
             });
 
-            socket.once('game-over', ({ winner }) => {
+            socket.on('game-over', ({ winner }) => {
                 dispatch(gameDispatch, setWinner(winner));
             });
 
-            socket.once('task-update', ({ tasksComplete }) => {
+            socket.on('task-update', ({ tasksComplete }) => {
                 dispatch(gameDispatch, setTasksCompleted(tasksComplete));
             });
 
-            socket.once('started-meeting', ({ playerStatuses }) => {
+            socket.on('started-meeting', ({ playerStatuses }) => {
                 dispatch(gameDispatch, setInMeeting(true));
                 dispatch(gameDispatch, setPlayerStatuses(playerStatuses));
             });
 
-            socket.once('emergency-started', () => {
+            socket.on('emergency-started', () => {
                 dispatch(gameDispatch, setInEmergency(true));
             });
 
-            socket.once('meeting-ended', ({killedPlayer}) => {
+            socket.on('meeting-ended', ({killedPlayer}) => {
                 if(userState.name === killedPlayer) {
                     dispatch(userDispatch, killPlayer());
                 }
                 dispatch(gameDispatch, setInMeeting(false));
             });
 
-            socket.once('final-votes', ({voteList}) => {
+            socket.on('final-votes', ({voteList}) => {
                 dispatch(gameDispatch, setVoteList(voteList));
             })
         }
