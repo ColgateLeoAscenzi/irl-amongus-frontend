@@ -129,12 +129,6 @@ const Game = ({ classes }) => {
             socket.once('final-votes', ({voteList}) => {
                 dispatch(gameDispatch, setVoteList(voteList));
             })
-
-            socket.once('finished-task', ({taskId}) => {
-                const taskCopy = userState.taskList;
-                delete taskCopy[taskId];
-                dispatch(userDispatch, setTaskList(taskCopy));
-            })
         }
 // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
